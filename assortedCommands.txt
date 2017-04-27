@@ -1,0 +1,40 @@
+--date /t & time /t & del c:\xstore\tmp\*.anchor & timeout 40 & net STOP ajbfipay & timeout 40 & date /t & time /t & START C:\dvinst\Verifone\forms
+
+date /t & time /t & del c:\xstore\tmp\*.anchor & timeout 40 & net STOP ajbfipay & timeout 40
+
+C:\dvinst\poshelper\POS_Helper.exe -restart
+
+date /t & time /t & del c:\xstore\tmp\*.anchor & timeout 40 & net STOP ajbfipay & timeout 40 & date /t & time /t & C:\dvinst\Verifone\forms\dvsetup.bat
+
+
+
+
+
+cd "C:\Program Files (x86)\VeriFone\MxDownloader"
+
+UPDATE OS
+cd "C:\Program Files (x86)\VeriFone\MxDownloader"
+if exist c:\dvinst\settings\PROD.flg start /wait mxdownloader.exe -s C:\dvinst\VeriFone\forms\dl.0625-3014-3025-to-30250800-mx-PROD.tgz -port 9 -baud 115200 -send -silent -xdld -type p -log c:\dvinst\deployment\dvsetup.log && timeout 600 
+
+CONTACTLESS
+cd "C:\Program Files (x86)\VeriFone\MxDownloader"
+if exist c:\dvinst\settings\PROD.flg start /wait mxdownloader.exe -s C:\dvinst\VeriFone\forms\DL.CTLS_L2_CD4_1.16.00A4-prod.tgz -port 9 -baud 115200 -send -silent -xdld -type p -log c:\dvinst\deployment\dvsetup.log && timeout 300
+
+FormAgent
+cd "C:\Program Files (x86)\VeriFone\MxDownloader"
+if exist c:\dvinst\settings\PROD.flg start /wait mxdownloader.exe -s C:\dvinst\VeriFone\forms\dl-ULTA-PROD-fa472-xpi5200u12lib-20161213-B.tgz -port 9 -baud 115200 -send -silent -xdld -type p -log c:\dvinst\deployment\dvsetup.log && timeout 600
+
+
+BinTable
+cd "C:\Program Files (x86)\VeriFone\MxDownloader"
+if exist c:\dvinst\settings\PROD.flg start /wait mxdownloader.exe -s C:\dvinst\VeriFone\forms\dl-ULTA-bintableupdate_160510-3281.tgz -port 9 -baud 115200 -send -silent -xdld -type p -log c:\dvinst\deployment\dvsetup.log && timeout 300
+
+
+net START ajbfipay & timeout 180 & exit
+
+
+
+
+goodtouse
+
+DO NOT USE THIS REGISTER. IT SUPPORT Working on a fix

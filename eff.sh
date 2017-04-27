@@ -80,9 +80,9 @@ grep --color -E "[W][A][R][N]" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" -
  
 #start ../arch/fi_"$card"_card_"$tran"/filter_"$fileToFilter"
 
-read -p 'Remove All Quick view Fi Folder? Y : ' removeflag; 
+read -p 'Remove All Quick view Fi Folder? y : ' removeflag; 
 
-if [ 'Y' == $removeflag ]; 
+if [ 'y' == $removeflag ]; 
 	then export removeflag=$6; echo Removing All Quick view fi_ folder;rm -rf ../view/fi_*; 
 fi
 

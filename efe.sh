@@ -14,6 +14,11 @@ if [ ! -z $3 ];
 	then export tran=$3; echo 'Tran# = ' $tran; 
 	else read -p 'Enter Tran# = ' tran; 
 fi
+
+read -p 'Remove All Quick view e_ Folder? y : ' removeflag; 
+if [ 'y' == $removeflag ]; 
+	then export removeflag=$4; echo Removing All Quick view e_ folder;rm -rf ../view/e_*; 
+fi
 tput setaf 7
 
 cd /d/ULTA/work/automate/scripts
@@ -42,11 +47,7 @@ sed -n "$(($firstline - 6)), $lastline" ../arch/e_"$tran"/"$fileToFilter" --> ..
 grep  --color -E "[E][R][R][O][R]" ../arch/e_"$tran"/"$fileToFilter" --> ../arch/e_"$tran"/"$tran"_error.log
 grep  --color -E "[W][A][R][N]" ../arch/e_"$tran"/"$fileToFilter" --> ../arch/e_"$tran"/"$tran"_warn.log
 
-read -p 'Remove All Quick view e_ Folder? Y : ' removeflag; 
-if [ 'Y' == $removeflag ]; 
-	then export removeflag=$4; echo Removing All Quick view e_ folder;rm -rf ../view/e_*; 
-fi
-rm -rf ../view/*_e
+rm -rf ../view/e_"$tran"
 mkdir -p ../view/e_"$tran"
 cp ../arch/e_"$tran"/* ../view/e_"$tran"
  

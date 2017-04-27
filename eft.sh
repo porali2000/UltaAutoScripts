@@ -82,7 +82,7 @@ tail -n +$lastline ../arch/x_"$tran"/"$tran"_full.log | grep --color -E ".Reques
 
 read -p 'Remove All Quick view x_ Folder? y : ' removeflag; 
 if [ 'y' == $removeflag ]; 
-	then export removeflag=$4; echo Removing All Quick view e_ folder;rm -rf ../view/x_*; 
+	then export removeflag=$4; echo Removing All Quick view x_ folder;rm -rf ../view/x_*; 
 fi
 
 rm -rf ../view/x_"$tran"
