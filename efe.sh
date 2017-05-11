@@ -28,8 +28,8 @@ fileToFilter=$store"_"$reg"_ej.log"
  
 echo File to Filter : $fileToFilter
  
-firstline=$(grep --color -m 1 -n -o "TRANS "$tran ../temp/$fileToFilter|head -1|awk -F':' '{print $1}p')
-lastline=$(grep --color -n -o "BARCODE.*"$tran ../temp/$fileToFilter| tail -1|awk -F':' '{print $1}')p
+firstline=$(grep -a --color -m 1 -n -o "TRANS "$tran ../temp/$fileToFilter|head -1|awk -F':' '{print $1}p')
+lastline=$(grep -a --color -n -o "BARCODE.*"$tran ../temp/$fileToFilter| tail -1|awk -F':' '{print $1}')p
  
 echo Filtering file from line# $firstline to $lastline
 if test -z $firstline; then
@@ -44,8 +44,8 @@ cp ../temp/"$fileToFilter" ../arch/e_"$tran"/"$fileToFilter"
 
 sed -n "$(($firstline - 6)), $lastline" ../arch/e_"$tran"/"$fileToFilter" --> ../arch/e_"$tran"/"$tran"_receipt.txt 
 
-grep  --color -E "[E][R][R][O][R]" ../arch/e_"$tran"/"$fileToFilter" --> ../arch/e_"$tran"/"$tran"_error.log
-grep  --color -E "[W][A][R][N]" ../arch/e_"$tran"/"$fileToFilter" --> ../arch/e_"$tran"/"$tran"_warn.log
+grep -a  --color -E "[E][R][R][O][R]" ../arch/e_"$tran"/"$fileToFilter" --> ../arch/e_"$tran"/"$tran"_error.log
+grep -a  --color -E "[W][A][R][N]" ../arch/e_"$tran"/"$fileToFilter" --> ../arch/e_"$tran"/"$tran"_warn.log
 
 rm -rf ../view/e_"$tran"
 mkdir -p ../view/e_"$tran"

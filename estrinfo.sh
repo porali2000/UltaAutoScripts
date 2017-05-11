@@ -4,4 +4,4 @@ tput setaf 3
 read -p 'Enter Wilcard# = ' wildcard
 tput setaf 7
 cd /d/ULTA/work/automate/scripts
-grep  --color -E "$wildcard" /d/ULTA/work/automate/data/storeinfo.csv
+grep -a  --color -E "$wildcard" /d/ULTA/work/automate/data/storeinfo.csv

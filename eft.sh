@@ -26,8 +26,8 @@ fileToFilter=$store"_"$reg"_xstore.log"
  
 echo File to Filter : $fileToFilter
  
-firstline=$(grep --color -m 1 -n -o "\\["$tran ../temp/$fileToFilter|head -1|awk -F':' '{print $1}p')
-lastline=$(grep --color -n -o "\\["$tran ../temp/$fileToFilter| tail -1|awk -F':' '{print $1}')
+firstline=$(grep -a --color -m 1 -n -o "\\["$tran ../temp/$fileToFilter|head -1|awk -F':' '{print $1}p')
+lastline=$(grep -a --color -n -o "\\["$tran ../temp/$fileToFilter| tail -1|awk -F':' '{print $1}')
  
 echo Filtering file from line# $(($firstline-100)) to $(($lastline+100))
 if test -z $firstline; then
@@ -43,40 +43,42 @@ cp ../temp/$store"_"$reg"_fipay.log" ../arch/x_"$tran"/$store"_"$reg"_fipay.log"
 
 sed -n "$(($firstline-100)), $(($lastline+100))p" ../temp/"$fileToFilter" --> ../arch/x_"$tran"/"$tran"_full.log
  
-grep --color -E "[C][H][A][I][N]|[*][*]|[-][-]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_quick_view_1.log
-grep --color -E "[C][H][A][I][N]|[*][*]|[[][P][r][o][m][p][t]|[[][A][c][t][i][o][n]|[[][I][n][p][u][t]|[[][E][v][e][n][t]|[T][R][A][N][S][A][C][T][I][O][N][ ][[]|[[][F][o][r][m]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_quick_view_2.log
-grep --color -E "[[][P][r][o][m][p][t]|[[][A][c][t][i][o][n]|[[][I][n][p][u][t]|[[][E][v][e][n][t]|[T][R][A][N][S][A][C][T][I][O][N][ ][[]|[[][F][o][r][m]|[[][P][r][o][m][p][t]|[[][C][o][n][t][e][x][t][|][M][e][n][u]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_quick_view_3.log 
+grep -a --color -E "[C][H][A][I][N]|[*][*]|[-][-]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_quick_view_1.log
+grep -a --color -E "[C][H][A][I][N]|[*][*]|[[][P][r][o][m][p][t]|[[][A][c][t][i][o][n]|[[][I][n][p][u][t]|[[][E][v][e][n][t]|[T][R][A][N][S][A][C][T][I][O][N][ ][[]|[[][F][o][r][m]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_quick_view_2.log
+grep -a --color -E "[[][P][r][o][m][p][t]|[[][A][c][t][i][o][n]|[[][I][n][p][u][t]|[[][E][v][e][n][t]|[T][R][A][N][S][A][C][T][I][O][N][ ][[]|[[][F][o][r][m]|[[][P][r][o][m][p][t]|[[][C][o][n][t][e][x][t][|][M][e][n][u]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_quick_view_3.log 
  
  
-grep  --color -E "[I][T][E][M]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_item.log
-grep  --color -E "[U][P][C]|[E][A][N]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_upc.log
+grep -a  --color -E "[I][T][E][M]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_item.log
+grep -a  --color -E "[U][P][C]|[E][A][N]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_upc.log
  
-grep --color -E "[,][S][a][l][e]|[,][R][e][f][u][n][d]|[F][i][P][a][y]|[R][e][q][u][e][s][t]|[R][e][s][p][o][n][s][e]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_fipay.log
-grep --color -E ".Request sent to FiPay|.Response from Fipay" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_request_sent.log
+grep -a --color -E "[,][S][a][l][e]|[,][R][e][f][u][n][d]|[F][i][P][a][y]|[R][e][q][u][e][s][t]|[R][e][s][p][o][n][s][e]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_fipay.log
+grep -a --color -E ".Request sent to FiPay|.Response from Fipay" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_request_sent.log
 
 
-grep --color -E "[ ][C][a][s][h]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_cash.log
-grep --color -E "[[][F][o][r][m]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_forms.log 
-grep --color -E "[[][E][v][e][n][t]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_events.log 
-grep --color -E "[[][P][r][o][m][p][t]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_prompts.log 
-grep --color -E "[[][I][n][p][u][t]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_inputs.log 
-grep --color -E "[[][P][r][o][m][p][t]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_prompts.log
-grep --color -E "[[][A][c][t][i][o][n]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_actions.log
-grep --color -E "[[][C][o][n][t][e][x][t][|][M][e][n][u]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_context_menu.log
-grep --color -E "[[][I][n][p][u][t]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_inputs.log  
-grep --color -E "COMMAND:XBATCH" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_commands.log
-grep --color -E " TENDER_" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_tenders_opted.log
+grep -a --color -E "[ ][C][a][s][h]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_cash.log
+grep -a --color -E "[[][F][o][r][m]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_forms.log 
+grep -a --color -E "[[][E][v][e][n][t]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_events.log 
+grep -a --color -E "[[][P][r][o][m][p][t]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_prompts.log 
+grep -a --color -E "[[][I][n][p][u][t]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_inputs.log 
+grep -a --color -E "[[][P][r][o][m][p][t]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_prompts.log
+grep -a --color -E "[[][A][c][t][i][o][n]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_actions.log
+grep -a --color -E "[[][C][o][n][t][e][x][t][|][M][e][n][u]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_context_menu.log
+grep -a --color -E "[[][I][n][p][u][t]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_inputs.log  
+grep -a --color -E "COMMAND:XBATCH" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_pinpad_commands.log
+grep -a --color -E "COMMAND:XBATCH.*XALI|COMMAND:XBATCH.*XULI" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_pinpad_view_1.log
+grep -a --color -E "COMMAND:XBATCH.*XSPV.*CAPTION.*XSPV" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_pinpad_view_2.log
+grep -a --color -E " TENDER_" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_tenders_opted.log
 
 
-grep  --color -E "[E][R][R][O][R]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_error.log
-grep  --color -E "[W][A][R][N]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_warn.log
+grep -a  --color -E "[E][R][R][O][R]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_error.log
+grep -a  --color -E "[W][A][R][N]" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_warn.log
 
 
 
-#grep --color -E ".Request sent to FiPay|.Response from Fipay" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_all_fipay_req_res.log
-#grep --color -E ".Request sent to FiPay.*\*$tran0$reg|.Response from Fipay.*\*$tran0$reg" ../arch/x_"$tran"/"$tran"_all_fipay_req_res.log --> ../arch/x_"$tran"/"$tran"_request_outofsync.log
+#grep -a --color -E ".Request sent to FiPay|.Response from Fipay" ../arch/x_"$tran"/"$tran"_full.log --> ../arch/x_"$tran"/"$tran"_all_fipay_req_res.log
+#grep -a --color -E ".Request sent to FiPay.*\*$tran0$reg|.Response from Fipay.*\*$tran0$reg" ../arch/x_"$tran"/"$tran"_all_fipay_req_res.log --> ../arch/x_"$tran"/"$tran"_request_outofsync.log
 
-tail -n +$lastline ../arch/x_"$tran"/"$tran"_full.log | grep --color -E ".Request sent to FiPay.*\*$tran0$reg|.Response from Fipay.*\*$tran0$reg"  --> ../arch/x_"$tran"/"$tran"_request_outofsync.log
+tail -n +$lastline ../arch/x_"$tran"/"$tran"_full.log | grep -a --color -E ".Request sent to FiPay.*\*$tran0$reg|.Response from Fipay.*\*$tran0$reg"  --> ../arch/x_"$tran"/"$tran"_request_outofsync.log
 
 #rm -rf ../arch/x_"$tran"/"$tran"_all_fipay_req_res.log
 

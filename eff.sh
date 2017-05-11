@@ -45,8 +45,8 @@ fileToFilter=$store"_"$reg"_fipay.log"
  
 rm -rf ../arch/fi_"$card"_card_"$tran"
  
-#firstline=$(grep --color -m 1 -n -o $card ../temp/$fileToFilter|head -1|awk -F':' '{print $1}p')
-#lastline=$(grep --color -n -o $card ../temp/$fileToFilter| tail -1|awk -F':' '{print $1}')p
+#firstline=$(grep -a --color -m 1 -n -o $card ../temp/$fileToFilter|head -1|awk -F':' '{print $1}p')
+#lastline=$(grep -a --color -n -o $card ../temp/$fileToFilter| tail -1|awk -F':' '{print $1}')p
 
 
 mkdir ../arch/fi_"$card"_card_"$tran"
@@ -54,28 +54,28 @@ cp ../temp/"$fileToFilter" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter"
 export reg=0$reg0
 
 
-grep --color -E ",Sale.*,.*$tran$reg" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$tran"_Sale.log
-grep --color -E ",Refund.*,.*$tran$reg" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$tran"_Refund.log
-grep --color -E ",Void.*,.*$tran$reg" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$tran"_Void.log
+grep -a --color -E ",Sale.*,.*$tran$reg" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$tran"_Sale.log
+grep -a --color -E ",Refund.*,.*$tran$reg" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$tran"_Refund.log
+grep -a --color -E ",Void.*,.*$tran$reg" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$tran"_Void.log
 
-grep --color -E "101,,,0,.*\*$tran$reg.*,Approved" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$tran"_approved.log
-grep --color -E "$authcode,Approved" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$authcode"_approved_by_authcode.log 
+grep -a --color -E "101,,,0,.*\*$tran$reg.*,Approved" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$tran"_approved.log
+grep -a --color -E "$authcode,Approved" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$authcode"_approved_by_authcode.log 
 
 
-grep --color -E "\*$card," ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_card_all_trans.log 
+grep -a --color -E "\*$card," ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_card_all_trans.log 
 
 
  
-#grep --color -E "[F][I][P][A][Y][P][1]|[T][C][P][C][O][M][1]|[*][*][*][*]" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/fi_"$card"_card__"$tran"pay_all_request.log
-#grep --color -E "[T][S][E][N][D][ ][D]|[T][D][A][T][A][ ][D]" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_TREQ.log
-#grep --color -E "[A][p][p][r][o][v][e][d]" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_Approved_Tran.log
-#grep --color -E '['"$card"'*Approved]' ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card__"$tran"/fi_"$card"_card_"$tran"pay_card_"$card".log
+#grep -a --color -E "[F][I][P][A][Y][P][1]|[T][C][P][C][O][M][1]|[*][*][*][*]" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/fi_"$card"_card__"$tran"pay_all_request.log
+#grep -a --color -E "[T][S][E][N][D][ ][D]|[T][D][A][T][A][ ][D]" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_TREQ.log
+#grep -a --color -E "[A][p][p][r][o][v][e][d]" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_Approved_Tran.log
+#grep -a --color -E '['"$card"'*Approved]' ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card__"$tran"/fi_"$card"_card_"$tran"pay_card_"$card".log
 
-grep --color -E "101,,,0,.*\*$card| \*$card.*,Approved" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_all_approved_request.log 
+grep -a --color -E "101,,,0,.*\*$card| \*$card.*,Approved" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_all_approved_request.log 
 
-grep --color -E "[T][S][E][N][D][ ][D].*\*$card,|[T][D][A][T][A][ ][D].*\*$card," ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_trequest.log
-grep --color -E "[E][R][R][O][R]" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_error.log
-grep --color -E "[W][A][R][N]" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_warn.log
+grep -a --color -E "[T][S][E][N][D][ ][D].*\*$card,|[T][D][A][T][A][ ][D].*\*$card," ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_trequest.log
+grep -a --color -E "[E][R][R][O][R]" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_error.log
+grep -a --color -E "[W][A][R][N]" ../arch/fi_"$card"_card_"$tran"/"$fileToFilter" --> ../arch/fi_"$card"_card_"$tran"/"$card"_warn.log
 
  
 #start ../arch/fi_"$card"_card_"$tran"/filter_"$fileToFilter"
